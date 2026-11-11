@@ -10,8 +10,6 @@ A C library for Etebase
 
 This package is implemented in Rust and exposes a C API for people to use.
 
-![GitHub tag](https://img.shields.io/github/tag/nikossvnk/libetebase.svg)
-
 # Documentation
 
 The C API is described in the header `etebase.h`, which `make` generates (with cbindgen) next to the library.
