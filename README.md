@@ -1,19 +1,20 @@
-<p align="center">
-  <img width="120" src="https://github.com/etesync/etesync-web/blob/master/src/images/logo.svg" />
-  <h1 align="center">Etebase - Encrypt Everything</h1>
-</p>
+<h1 align="center">Etebase - Encrypt Everything</h1>
+
+> [!NOTE]
+> **This is an independent fork** of [libetebase](https://github.com/etesync/libetebase), the original
+> project of the EteSync authors. This fork is not affiliated with, endorsed by or supported by EteSync or
+> Etebase in any way. The history of the original project is kept as it is, with its authors, and the
+> changes of this fork follow it. Like the original, it's licensed under the [BSD-3-Clause](./LICENSE) license.
 
 A C library for Etebase
 
 This package is implemented in Rust and exposes a C API for people to use.
 
-![GitHub tag](https://img.shields.io/github/tag/etesync/libetebase.svg)
-[![Build Status](https://travis-ci.com/etesync/libetebase.svg?branch=master)](https://travis-ci.com/etesync/libetebase)
-[![Chat with us](https://img.shields.io/badge/chat-IRC%20|%20Matrix%20|%20Web-blue.svg)](https://www.etebase.com/community-chat/)
+![GitHub tag](https://img.shields.io/github/tag/nikossvnk/libetebase.svg)
 
 # Documentation
 
-In addition to the API documentation, there are docs available at https://docs.etebase.com
+The C API is described in the header `etebase.h`, which `make` generates (with cbindgen) next to the library.
 
 # Build
 
