@@ -239,8 +239,7 @@ dependencies = [
 [[package]]
 name = "etebase"
 version = "0.6.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "447bbbd0acdb2301b11080cbdea4a3934af4868bc2dba5f8abf09117962ba372"
+source = "git+https://github.com/nikossvnk/etebase-rs?rev=c0c74b777724777713d0fbbaeb968ba1521aa8e8#c0c74b777724777713d0fbbaeb968ba1521aa8e8"
 dependencies = [
  "cc",
  "ed25519",

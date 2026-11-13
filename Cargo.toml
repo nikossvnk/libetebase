@@ -1,8 +1,8 @@
 [package]
 name = "libetebase"
 description = "C library for etebase"
-homepage = "https://www.etebase.com"
-repository = "https://github.com/etesync/libetebase/"
+homepage = "https://github.com/nikossvnk/libetebase/"
+repository = "https://github.com/nikossvnk/libetebase/"
 version = "0.5.8"
 authors = ["Tom Hacohen <tom@stosb.com>"]
 edition = "2018"
@@ -17,4 +17,4 @@ crate-type = ["cdylib"]
 cbindgen = "^0.14.2"
 
 [dependencies]
-etebase = "^0.6.1"
+etebase = { git = "https://github.com/nikossvnk/etebase-rs", rev = "c0c74b777724777713d0fbbaeb968ba1521aa8e8" } # v0.6.1
