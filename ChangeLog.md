@@ -1,5 +1,13 @@
 # Changelog
 
+## Unreleased
+* **Breaking:** remove `etebase_get_default_server_url()`: there's no default server anymore.
+* Use the fork's etebase-rs (`nikossvnk/etebase-rs` master), which fixes content with duplicate chunks
+  (a repeated run of 16 KiB or more in one item couldn't be read back).
+* `etebase_client_check_etebase_server()` uses `Client::is_server_valid()`.
+* Don't pass `-soname` to the linker when building for macOS or iOS.
+* Update the dependencies, and cbindgen to 0.29 (the header now also uses typed enums with C23).
+
 ## Version 0.5.8
 * Update etebase dependency.
 
