@@ -7,8 +7,11 @@ use std::env;
 
 fn main() {
     let crate_dir = env::var("CARGO_MANIFEST_DIR").unwrap();
-    if cfg!(unix) && !cfg!(macos) {
-        // Set soname for platforms other than Windows
+    // Build scripts run on the host, so check the target through Cargo's variables, not cfg!()
+    let target_family = env::var("CARGO_CFG_TARGET_FAMILY").unwrap_or_default();
+    let target_vendor = env::var("CARGO_CFG_TARGET_VENDOR").unwrap_or_default();
+    if target_family == "unix" && target_vendor != "apple" {
+        // Set the soname for ELF platforms (not Windows or Apple's)
         const VERSION_MAJOR: &str = env!("CARGO_PKG_VERSION_MAJOR");
         println!(
             "cargo:rustc-cdylib-link-arg=-Wl,-soname,libetebase.so.{}",
