@@ -15,7 +15,7 @@ use etebase::{
         CollectionInvitationManager, CollectionManager, CollectionMemberManager, ItemManager,
     },
     Account, Client, Collection, CollectionAccessLevel, CollectionMember, Item, ItemMetadata,
-    RemovedCollection, SignedInvitation, User, UserProfile, DEFAULT_SERVER_URL,
+    RemovedCollection, SignedInvitation, User, UserProfile,
 };
 
 macro_rules! try_or_null {
@@ -136,21 +136,6 @@ pub extern "C" fn etebase_error_get_message() -> *const c_char {
 }
 
 // Class Utils {
-
-/// The URL of the main hosted server
-#[no_mangle]
-pub extern "C" fn etebase_get_default_server_url() -> *const c_char {
-    thread_local! {
-        static LAST: RefCell<Option<CString>> = RefCell::new(None);
-    }
-    LAST.with(|ret| {
-        *ret.borrow_mut() = CString::new(DEFAULT_SERVER_URL).ok();
-        ret.borrow()
-            .as_ref()
-            .map(|x| x.as_ptr())
-            .unwrap_or(std::ptr::null())
-    })
-}
 
 /// Convert a Base64 URL encoded string to a buffer
 ///
@@ -299,7 +284,7 @@ pub unsafe extern "C" fn etebase_client_set_server_url(
 /// @param client the object handle
 #[no_mangle]
 pub unsafe extern "C" fn etebase_client_check_etebase_server(client: &Client) -> i32 {
-    let ret = try_or_int!(Account::is_etebase_server(client));
+    let ret = try_or_int!(client.is_server_valid());
     if ret {
         0
     } else {

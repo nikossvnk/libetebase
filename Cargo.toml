@@ -14,7 +14,7 @@ name = "etebase"
 crate-type = ["cdylib"]
 
 [build-dependencies]
-cbindgen = "^0.14.2"
+cbindgen = "^0.29.4"
 
 [dependencies]
-etebase = { git = "https://github.com/nikossvnk/etebase-rs", rev = "c0c74b777724777713d0fbbaeb968ba1521aa8e8" } # v0.6.1
+etebase = { git = "https://github.com/nikossvnk/etebase-rs", rev = "3ae5348bdf29aaa2f4733f3b88d2bb5b27d330e3" }

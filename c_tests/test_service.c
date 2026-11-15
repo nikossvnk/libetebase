@@ -84,7 +84,6 @@ test_base64() {
 
 int
 test_utils() {
-    assert_str_eq(etebase_get_default_server_url(), "https://api.etebase.com/");
     char buf[32];
     fail_if(etebase_utils_randombytes(buf, sizeof(buf)));
     char pretty[ETEBASE_UTILS_PRETTY_FINGERPRINT_SIZE];
@@ -676,8 +675,10 @@ test_collection_as_item() {
                         deps, ETEBASE_UTILS_C_ARRAY_LEN(deps), NULL));
         }
         {
+            // Neither item changed since it was saved: the server accepts uploading a revision it already
+            // has as a no-op (since etebase-server's "Gracefully handle uploading the same item twice").
             const EtebaseItem *items[] = { col_item, item1 };
-            fail_if(!etebase_item_manager_batch(item_mgr, items, ETEBASE_UTILS_C_ARRAY_LEN(items), NULL));
+            fail_if(etebase_item_manager_batch(item_mgr, items, ETEBASE_UTILS_C_ARRAY_LEN(items), NULL));
         }
 
         // In addition, these are true:
