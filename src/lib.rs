@@ -2447,16 +2447,25 @@ pub unsafe extern "C" fn etebase_signed_invitation_get_access_level(
     this.access_level()
 }
 
-/// The username this invitation is from
+/// The username this invitation is from, or NULL if it isn't known
+///
+/// The returned string is valid until the next call to this function on the same thread.
 ///
 /// @param this_ the object handle
 #[no_mangle]
 pub unsafe extern "C" fn etebase_signed_invitation_get_from_username(
     this: &SignedInvitation,
-) -> *const c_void {
-    this.sender_username()
-        .map(|x| x.as_ptr())
-        .unwrap_or(std::ptr::null()) as *const c_void
+) -> *const c_char {
+    thread_local! {
+        static LAST: RefCell<Option<CString>> = RefCell::new(None);
+    }
+    LAST.with(|ret| {
+        *ret.borrow_mut() = this.sender_username().and_then(|x| CString::new(x).ok());
+        ret.borrow()
+            .as_ref()
+            .map(|x| x.as_ptr())
+            .unwrap_or(std::ptr::null())
+    })
 }
 
 /// The public key of the inviting user

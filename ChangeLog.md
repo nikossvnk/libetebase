@@ -5,6 +5,8 @@
 * Use the fork's etebase-rs (`nikossvnk/etebase-rs` master), which fixes content with duplicate chunks
   (a repeated run of 16 KiB or more in one item couldn't be read back).
 * `etebase_client_check_etebase_server()` uses `Client::is_server_valid()`.
+* Fix `etebase_signed_invitation_get_from_username()`: the string had no terminating NUL, so reading it
+  read past its end. It now returns `const char *`.
 * Don't pass `-soname` to the linker when building for macOS or iOS.
 * Update the dependencies, and cbindgen to 0.29 (the header now also uses typed enums with C23).
 
