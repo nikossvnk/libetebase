@@ -96,5 +96,4 @@ jobs:
         working-directory: c_tests
         env:
           ETEBASE_TEST_API_URL: http://127.0.0.1:3735
-          LD_LIBRARY_PATH: ${{ github.workspace }}/target/release
         run: make check
