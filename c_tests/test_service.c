@@ -795,6 +795,21 @@ test_basic_invitations() {
     fail_if(etebase_invitation_manager_invite(invitation_manager, col, "test_user2", etebase_user_profile_get_pubkey(user2), etebase_user_profile_get_pubkey_size(user2), ETEBASE_COLLECTION_ACCESS_LEVEL_READ_ONLY));
 
     {
+        EtebaseInvitationListResponse *invitations = etebase_invitation_manager_list_outgoing(invitation_manager, NULL);
+        fail_if(!invitations);
+
+        uintptr_t data_len = etebase_invitation_list_response_get_data_length(invitations);
+        assert_int_eq(1, data_len);
+        const EtebaseSignedInvitation *data[data_len];
+        fail_if(etebase_invitation_list_response_get_data(invitations, data));
+
+        assert_str_eq("test_user2", etebase_signed_invitation_get_username(data[0]));
+        assert_str_eq("test_user", etebase_signed_invitation_get_from_username(data[0]));
+
+        etebase_invitation_list_response_destroy(invitations);
+    }
+
+    {
         EtebaseCollectionMemberManager *member_manager = etebase_collection_manager_get_member_manager(col_mgr, col);
 
         EtebaseMemberListResponse *members = etebase_collection_member_manager_list(member_manager, NULL);
